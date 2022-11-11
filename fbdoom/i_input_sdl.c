@@ -18,10 +18,10 @@
 
 
 #include "SDL/SDL.h"
-#include <stdlib.h>
-#include <ctype.h>
+#include "stdlib.h"
+#include "ctype.h"
 #include <math.h>
-#include <string.h>
+#include "string.h"
 
 #include "config.h"
 #include "deh_str.h"

@@ -18,10 +18,10 @@
 
 
 #include "SDL/SDL.h"
-#include <stdlib.h>
-#include <ctype.h>
-#include <math.h>
-#include <string.h>
+#include "stdlib.h"
+#include "ctype.h"
+#include "math.h"
+#include "strings.h"
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN

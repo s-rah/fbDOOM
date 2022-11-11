@@ -20,10 +20,11 @@
 #ifndef __M_MISC__
 #define __M_MISC__
 
-#include <stdio.h>
+#include "stdio.h"
 #include <stdarg.h>
 
 #include "doomtype.h"
+#include "stddef.h"
 
 boolean M_WriteFile(char *name, void *source, int length);
 int M_ReadFile(char *name, byte **buffer);

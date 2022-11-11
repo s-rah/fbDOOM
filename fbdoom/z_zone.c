@@ -20,7 +20,7 @@
 #include "z_zone.h"
 #include "i_system.h"
 #include "doomtype.h"
-
+#include "stdlib.h"
 
 //
 // ZONE MEMORY ALLOCATION

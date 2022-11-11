@@ -18,10 +18,10 @@
 //
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "strings.h"
+#include "ctype.h"
 #include <errno.h>
 
 #include "config.h"
@@ -1762,9 +1762,9 @@ static void SetVariable(default_t *def, char *value)
             * (int *) def->location = intparm;
             break;
 
-        case DEFAULT_FLOAT:
-            * (float *) def->location = (float) atof(value);
-            break;
+       // case DEFAULT_FLOAT:
+         //   * (float *) def->location = (float) atof(value);
+           // break;
     }
 }
 

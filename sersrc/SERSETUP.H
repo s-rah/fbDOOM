@@ -1,14 +1,14 @@
 #include <conio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 #include <conio.h>
-#include <ctype.h>
+#include "ctype.h"
 #include <dos.h>
 #include <process.h>
 #include <stdarg.h>
 #include <bios.h>
-#include <ctype.h>
+#include "ctype.h"
 
 
 #define INPUT(port)       	inportb(port)

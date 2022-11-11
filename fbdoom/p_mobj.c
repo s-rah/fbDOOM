@@ -16,7 +16,7 @@
 //	Moving object handling. Spawn functions.
 //
 
-#include <stdio.h>
+#include "stdio.h"
 
 #include "i_system.h"
 #include "z_zone.h"
@@ -32,7 +32,7 @@
 #include "s_sound.h"
 
 #include "doomstat.h"
-
+#include "stdlib.h"
 
 void G_PlayerReborn (int player);
 void P_SpawnMapThing (mapthing_t*	mthing);

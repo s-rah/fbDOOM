@@ -17,7 +17,7 @@
 //
 
 
-#include <stdio.h>
+#include "stdio.h"
 
 #include "z_zone.h"
 
@@ -36,7 +36,7 @@
 #include "s_sound.h"
 
 #include "doomstat.h"
-
+#include "stdlib.h"
 // Data.
 #include "sounds.h"
 

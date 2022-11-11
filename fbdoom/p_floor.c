@@ -29,7 +29,7 @@
 #include "r_state.h"
 // Data.
 #include "sounds.h"
-
+#include "stdlib.h"
 
 //
 // FLOORS

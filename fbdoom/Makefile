@@ -20,14 +20,10 @@ OBJS+=$(OBJDIR)/i_video_fbdev.o
 OBJS+=$(OBJDIR)/i_input_tty.o
 
 CC=$(CROSS_COMPILE)gcc  # gcc or g++
-CFLAGS+=-ggdb3 -Os
-LDFLAGS+=-Wl,--gc-sections
-CFLAGS+=-ggdb3 -Wall -DNORMALUNIX -DLINUX -DSNDSERV # -DUSEASM
-LIBS+=-lm -lc
-
-ifneq ($(NOSDL),1)
-	LIBS+= -lSDL
-endif
+CFLAGS+=-fno-builtin -nodefaultlibs -nostdlib -nolibc -I ../../stdlib
+LDFLAGS+=-fno-builtin -nodefaultlibs -nostdlib -nolibc -Wl,--gc-sections
+CFLAGS+= -Wall
+LIBS+=
 
 # subdirectory for objects
 OBJDIR=build

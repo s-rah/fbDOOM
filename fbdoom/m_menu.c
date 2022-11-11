@@ -18,8 +18,8 @@
 //
 
 
-#include <stdlib.h>
-#include <ctype.h>
+#include "stdlib.h"
+#include "ctype.h"
 
 
 #include "doomdef.h"
@@ -680,25 +680,25 @@ void M_QuickSaveResponse(int key)
 
 void M_QuickSave(void)
 {
-    if (!usergame)
-    {
-	S_StartSound(NULL,sfx_oof);
-	return;
-    }
-
-    if (gamestate != GS_LEVEL)
-	return;
-	
-    if (quickSaveSlot < 0)
-    {
-	M_StartControlPanel();
-	M_ReadSaveStrings();
-	M_SetupNextMenu(&SaveDef);
-	quickSaveSlot = -2;	// means to pick a slot now
-	return;
-    }
-    DEH_snprintf(tempstring, 80, QSPROMPT, savegamestrings[quickSaveSlot]);
-    M_StartMessage(tempstring,M_QuickSaveResponse,true);
+//    if (!usergame)
+//    {
+//	S_StartSound(NULL,sfx_oof);
+//	return;
+//    }
+//
+//    if (gamestate != GS_LEVEL)
+//	return;
+//
+//    if (quickSaveSlot < 0)
+//    {
+//	M_StartControlPanel();
+//	M_ReadSaveStrings();
+//	M_SetupNextMenu(&SaveDef);
+//	quickSaveSlot = -2;	// means to pick a slot now
+//	return;
+//    }
+//    DEH_snprintf(tempstring, 80, QSPROMPT, savegamestrings[quickSaveSlot]);
+//    M_StartMessage(tempstring,M_QuickSaveResponse,true);
 }
 
 
@@ -967,8 +967,8 @@ void M_Episode(int choice)
     if ( (gamemode == registered)
 	 && (choice > 2))
     {
-      fprintf( stderr,
-	       "M_Episode: 4th episode requires UltimateDOOM\n");
+      //fprintf( stderr,
+	   //    "M_Episode: 4th episode requires UltimateDOOM\n");
       choice = 0;
     }
 	 

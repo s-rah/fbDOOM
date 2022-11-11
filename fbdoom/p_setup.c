@@ -39,7 +39,7 @@
 #include "s_sound.h"
 
 #include "doomstat.h"
-
+#include "stdlib.h"
 
 void	P_SpawnMapThing (mapthing_t*	mthing);
 
@@ -691,8 +691,8 @@ static void PadRejectArray(byte *array, unsigned int len)
 
     if (len > sizeof(rejectpad))
     {
-        fprintf(stderr, "PadRejectArray: REJECT lump too short to pad! (%i > %i)\n",
-                        len, (int) sizeof(rejectpad));
+       // fprintf(stderr, "PadRejectArray: REJECT lump too short to pad! (%i > %i)\n",
+        //                len, (int) sizeof(rejectpad));
 
         // Pad remaining space with 0 (or 0xff, if specified on command line).
 

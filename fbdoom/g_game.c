@@ -17,8 +17,8 @@
 
 
 
-#include <string.h>
-#include <stdlib.h>
+#include "strings.h"
+#include "stdlib.h"
 #include <math.h>
 
 #include "doomdef.h" 
@@ -1672,8 +1672,8 @@ void G_DoSaveGame (void)
     // Now rename the temporary savegame file to the actual savegame
     // file, overwriting the old savegame if there was one there.
 
-    remove(savegame_file);
-    rename(temp_savegame_file, savegame_file);
+  //  remove(savegame_file);
+    //rename(temp_savegame_file, savegame_file);
     
     gameaction = ga_nothing;
     M_StringCopy(savedescription, "", sizeof(savedescription));

@@ -17,8 +17,8 @@
 //
 
 
-#include <stdio.h>
-#include <ctype.h>
+#include "stdio.h"
+#include "ctype.h"
 
 // Functions.
 #include "deh_main.h"
@@ -28,6 +28,7 @@
 #include "v_video.h"
 #include "w_wad.h"
 #include "s_sound.h"
+#include "stdlib.h"
 
 // Data.
 #include "d_main.h"

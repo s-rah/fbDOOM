@@ -17,9 +17,10 @@
 //
 
 
-#include <stdio.h>
+#include "stdio.h"
 
 #include "deh_main.h"
+#include "stddef.h"
 
 #include "z_zone.h"
 #include "doomkeys.h"
@@ -43,8 +44,10 @@
 // Data.
 #include "dstrings.h"
 
-#include "am_map.h"
+#include "stddef.h"
 
+#include "am_map.h"
+#include "strings.h"
 
 // For use if I do walls with outsides/insides
 #define REDS		(256-5*16)
@@ -995,7 +998,7 @@ AM_drawFline
     register int ay;
     register int d;
     
-    static int fuck = 0;
+   // static int fuck = 0;
 
     // For debugging only
     if (      fl->a.x < 0 || fl->a.x >= f_w
@@ -1003,7 +1006,7 @@ AM_drawFline
 	   || fl->b.x < 0 || fl->b.x >= f_w
 	   || fl->b.y < 0 || fl->b.y >= f_h)
     {
-        DEH_fprintf(stderr, "fuck %d \r", fuck++);
+       // DEH_fprintf(stderr, "fuck %d \r", fuck++);
 	return;
     }
 

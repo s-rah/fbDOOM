@@ -16,7 +16,7 @@
 //
 
 #include "SDL.h"
-#include <string.h>
+#include "string.h"
 
 #include "doomtype.h"
 

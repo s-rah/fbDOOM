@@ -17,8 +17,8 @@
 //
 
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "stdio.h"
+#include "stdlib.h"
 
 #include "dstrings.h"
 #include "deh_main.h"
@@ -32,6 +32,7 @@
 #include "g_game.h"
 #include "m_misc.h"
 #include "r_state.h"
+#include "inttypes.h"
 
 #define SAVEGAME_EOF 0x1d
 #define VERSIONSIZE 16 
@@ -86,8 +87,8 @@ static byte saveg_read8(void)
     {
         if (!savegame_error)
         {
-            fprintf(stderr, "saveg_read8: Unexpected end of file while "
-                            "reading save game\n");
+            //fprintf(stderr, "saveg_read8: Unexpected end of file while "
+              //              "reading save game\n");
 
             savegame_error = true;
         }
@@ -102,7 +103,7 @@ static void saveg_write8(byte value)
     {
         if (!savegame_error)
         {
-            fprintf(stderr, "saveg_write8: Error while writing save game\n");
+           // fprintf(stderr, "saveg_write8: Error while writing save game\n");
 
             savegame_error = true;
         }

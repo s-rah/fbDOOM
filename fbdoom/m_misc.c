@@ -18,10 +18,10 @@
 //
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "strings.h"
+#include "ctype.h"
 #include <errno.h>
 
 #ifdef _WIN32
@@ -54,11 +54,7 @@
 
 void M_MakeDirectory(char *path)
 {
-#ifdef _WIN32
-    mkdir(path);
-#else
-    mkdir(path, 0755);
-#endif
+
 }
 
 // Check if a file exists
@@ -76,10 +72,10 @@ boolean M_FileExists(char *filename)
     }
     else
     {
-        // If we can't open because the file is a directory, the 
+        // If we can't open because the file is a directory, the
         // "file" exists at least!
 
-        return errno == EISDIR;
+        return true;
     }
 }
 
@@ -88,21 +84,22 @@ boolean M_FileExists(char *filename)
 //
 
 long M_FileLength(FILE *handle)
-{ 
-    long savedpos;
-    long length;
-
-    // save the current position in the file
-    savedpos = ftell(handle);
-    
-    // jump to the end and find the length
-    fseek(handle, 0, SEEK_END);
-    length = ftell(handle);
-
-    // go back to the old location
-    fseek(handle, savedpos, SEEK_SET);
-
-    return length;
+{
+	return 0;
+//    long savedpos;
+//    long length;
+//
+//    // save the current position in the file
+//    savedpos = ftell(handle);
+//
+//    // jump to the end and find the length
+//    fseek(handle, 0, SEEK_END);
+//    length = ftell(handle);
+//
+//    // go back to the old location
+//    fseek(handle, savedpos, SEEK_SET);
+//
+//    return length;
 }
 
 //
@@ -113,7 +110,7 @@ boolean M_WriteFile(char *name, void *source, int length)
 {
     FILE *handle;
     int	count;
-	
+
     handle = fopen(name, "wb");
 
     if (handle == NULL)
@@ -121,10 +118,10 @@ boolean M_WriteFile(char *name, void *source, int length)
 
     count = fwrite(source, 1, length, handle);
     fclose(handle);
-	
+
     if (count < length)
 	return false;
-		
+
     return true;
 }
 
@@ -138,7 +135,7 @@ int M_ReadFile(char *name, byte **buffer)
     FILE *handle;
     int	count, length;
     byte *buf;
-	
+
     handle = fopen(name, "rb");
     if (handle == NULL)
 	I_Error ("Couldn't read file %s", name);
@@ -147,14 +144,14 @@ int M_ReadFile(char *name, byte **buffer)
     // reading the current position
 
     length = M_FileLength(handle);
-    
+
     buf = Z_Malloc (length, PU_STATIC, NULL);
     count = fread(buf, 1, length, handle);
     fclose (handle);
-	
+
     if (count < length)
 	I_Error ("Couldn't read file %s", name);
-		
+
     *buffer = buf;
     return length;
 }
@@ -416,8 +413,9 @@ boolean M_StringStartsWith(const char *s, const char *prefix)
 
 boolean M_StringEndsWith(const char *s, const char *suffix)
 {
-    return strlen(s) >= strlen(suffix)
-        && strcmp(s + strlen(s) - strlen(suffix), suffix) == 0;
+	return true;
+   // return strlen(s) >= strlen(suffix)
+       // && strcmp(s + strlen(s) - strlen(suffix), suffix) == 0;
 }
 
 // Return a newly-malloced string with all the strings given as arguments
@@ -491,7 +489,7 @@ int M_vsnprintf(char *buf, size_t buf_len, const char *s, va_list args)
     // Windows (and other OSes?) has a vsnprintf() that doesn't always
     // append a trailing \0. So we must do it, and write into a buffer
     // that is one byte shorter; otherwise this function is unsafe.
-    result = vsnprintf(buf, buf_len, s, args);
+    result = snprintf(buf, buf_len, s, args);
 
     // If truncated, change the final char in the buffer to a \0.
     // A negative result indicates a truncated buffer on Windows.

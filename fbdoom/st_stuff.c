@@ -20,7 +20,7 @@
 
 
 
-#include <stdio.h>
+#include "stdio.h"
 
 #include "i_system.h"
 #include "i_video.h"
@@ -28,7 +28,7 @@
 #include "m_misc.h"
 #include "m_random.h"
 #include "w_wad.h"
-
+#include "stdlib.h"
 #include "deh_main.h"
 #include "deh_misc.h"
 #include "doomdef.h"
@@ -57,7 +57,7 @@
 // Data.
 #include "dstrings.h"
 #include "sounds.h"
-
+#include "stdlib.h"
 //
 // STATUS BAR DATA
 //

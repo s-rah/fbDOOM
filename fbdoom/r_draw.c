@@ -32,11 +32,11 @@
 
 // Needs access to LFB (guess what).
 #include "v_video.h"
-
+#include "stdlib.h"
 // State.
 #include "doomstat.h"
 
-
+#include "stdlib.h"
 // ?
 #define MAXWIDTH			1120
 #define MAXHEIGHT			832

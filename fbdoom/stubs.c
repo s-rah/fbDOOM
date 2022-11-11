@@ -2,7 +2,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <string.h>
+#include "string.h"
 
 //XXX FIXME
 in_addr_t inet_addr(const char *cp)

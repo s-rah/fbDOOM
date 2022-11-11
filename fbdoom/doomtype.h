@@ -32,7 +32,7 @@
 
 #else
 
-#include <strings.h>
+#include "strings.h"
 
 #endif
 

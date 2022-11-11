@@ -19,8 +19,8 @@
 //	Functions to blit a block to the screen.
 //
 
-#include <stdio.h>
-#include <string.h>
+#include "stdio.h"
+#include "strings.h"
 #include <math.h>
 
 #include "i_system.h"
@@ -35,7 +35,7 @@
 #include "v_video.h"
 #include "w_wad.h"
 #include "z_zone.h"
-
+#include "stdlib.h"
 #include "config.h"
 #ifdef HAVE_LIBPNG
 #include <png.h>
@@ -790,54 +790,54 @@ void WritePNGfile(char *filename, byte *data,
 
 void V_ScreenShot(char *format)
 {
-    int i;
-    char lbmname[16]; // haleyjd 20110213: BUG FIX - 12 is too small!
-    char *ext;
-    
-    // find a file name to save it to
-
-#ifdef HAVE_LIBPNG
-    extern int png_screenshots;
-    if (png_screenshots)
-    {
-        ext = "png";
-    }
-    else
-#endif
-    {
-        ext = "pcx";
-    }
-
-    for (i=0; i<=99; i++)
-    {
-        M_snprintf(lbmname, sizeof(lbmname), format, i, ext);
-
-        if (!M_FileExists(lbmname))
-        {
-            break;      // file doesn't exist
-        }
-    }
-
-    if (i == 100)
-    {
-        I_Error ("V_ScreenShot: Couldn't create a PCX");
-    }
-
-#ifdef HAVE_LIBPNG
-    if (png_screenshots)
-    {
-    WritePNGfile(lbmname, I_VideoBuffer,
-                 SCREENWIDTH, SCREENHEIGHT,
-                 W_CacheLumpName (DEH_String("PLAYPAL"), PU_CACHE));
-    }
-    else
-#endif
-    {
-    // save the pcx file
-    WritePCXfile(lbmname, I_VideoBuffer,
-                 SCREENWIDTH, SCREENHEIGHT,
-                 W_CacheLumpName (DEH_String("PLAYPAL"), PU_CACHE));
-    }
+//    int i;
+//    char lbmname[16]; // haleyjd 20110213: BUG FIX - 12 is too small!
+//    char *ext;
+//
+//    // find a file name to save it to
+//
+//#ifdef HAVE_LIBPNG
+//    extern int png_screenshots;
+//    if (png_screenshots)
+//    {
+//        ext = "png";
+//    }
+//    else
+//#endif
+//    {
+//        ext = "pcx";
+//    }
+//
+//    for (i=0; i<=99; i++)
+//    {
+//        M_snprintf(lbmname, sizeof(lbmname), format, i, ext);
+//
+//        if (!M_FileExists(lbmname))
+//        {
+//            break;      // file doesn't exist
+//        }
+//    }
+//
+//    if (i == 100)
+//    {
+//        I_Error ("V_ScreenShot: Couldn't create a PCX");
+//    }
+//
+//#ifdef HAVE_LIBPNG
+//    if (png_screenshots)
+//    {
+//    WritePNGfile(lbmname, I_VideoBuffer,
+//                 SCREENWIDTH, SCREENHEIGHT,
+//                 W_CacheLumpName (DEH_String("PLAYPAL"), PU_CACHE));
+//    }
+//    else
+//#endif
+//    {
+//    // save the pcx file
+//    WritePCXfile(lbmname, I_VideoBuffer,
+//                 SCREENWIDTH, SCREENHEIGHT,
+//                 W_CacheLumpName (DEH_String("PLAYPAL"), PU_CACHE));
+//    }
 }
 
 #define MOUSE_SPEED_BOX_WIDTH  120
@@ -865,10 +865,10 @@ void V_DrawMouseSpeedBox(int speed)
     // If the mouse is turned off or acceleration is turned off, don't
     // draw the box at all.
 
-    if (!usemouse || fabs(mouse_acceleration - 1) < 0.01)
-    {
-        return;
-    }
+//    if (!usemouse || fabs(mouse_acceleration - 1) < 0.01)
+//    {
+//        return;
+//    }
 
     // Calculate box position
 

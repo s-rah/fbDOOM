@@ -3,10 +3,10 @@
 #define DOOM2
 
 #include <conio.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "stdio.h"
+#include "stdlib.h"
 #include <dos.h>
-#include <string.h>
+#include "string.h"
 #include <process.h>
 #include <stdarg.h>
 #include <bios.h>

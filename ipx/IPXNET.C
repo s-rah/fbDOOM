@@ -1,9 +1,9 @@
 // ipxnet.c
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "stdio.h"
+#include "stdlib.h"
 #include <dos.h>
-#include <string.h>
+#include "string.h"
 #include <process.h>
 #include <values.h>
 

@@ -18,7 +18,7 @@
 #ifndef DEH_STR_H
 #define DEH_STR_H
 
-#include <stdio.h>
+#include "stdio.h"
 
 #include "doomfeatures.h"
 

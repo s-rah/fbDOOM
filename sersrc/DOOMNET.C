@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include "stdio.h"
 #include <io.h>
-#include <stdlib.h>
-#include <string.h>
+#include "stdlib.h"
+#include "string.h"
 #include <process.h>
 #include <dos.h>
 #include "doomnet.h"
