@@ -450,6 +450,9 @@ static void GenerateTextureHashTable(void)
 //
 void R_InitTextures (void)
 {
+
+	printf("init textures...\n");
+
     maptexture_t*	mtexture;
     texture_t*		texture;
     mappatch_t*		mpatch;
@@ -485,11 +488,12 @@ void R_InitTextures (void)
     
     // Load the patch names from pnames.lmp.
     name[8] = 0;
+    printf("textures cache lump\n");
     names = W_CacheLumpName (DEH_String("PNAMES"), PU_STATIC);
     nummappatches = LONG ( *((int *)names) );
     name_p = names + 4;
     patchlookup = Z_Malloc(nummappatches*sizeof(*patchlookup), PU_STATIC, NULL);
-
+    printf("textures zmalloc\n");
     for (i = 0; i < nummappatches; i++)
     {
         M_StringCopy(name, name_p + i * 8, sizeof(name));

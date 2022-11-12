@@ -846,9 +846,13 @@ P_SetupLevel
 //
 void P_Init (void)
 {
+	printf("init swtich\n");
     P_InitSwitchList ();
+	printf("init pic\n");
     P_InitPicAnims ();
+	printf("init sprites\n");
     R_InitSprites (sprnames);
+	printf("pinit done\n");
 }
 
 

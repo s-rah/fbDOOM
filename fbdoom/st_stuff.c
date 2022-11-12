@@ -1171,7 +1171,9 @@ void ST_loadGraphics(void)
 
 void ST_loadData(void)
 {
+	printf("loading data...\n");
     lu_palette = W_GetNumForName (DEH_String("PLAYPAL"));
+	printf("loading graphics...\n");
     ST_loadGraphics();
 }
 

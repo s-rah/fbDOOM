@@ -568,6 +568,7 @@ void __attribute__ ((weak)) I_GetEvent(void)
 //
 void I_StartFrame (void)
 {
+	printf("staring frame\n");
     I_GetEvent();
 }
 

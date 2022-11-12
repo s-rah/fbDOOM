@@ -47,7 +47,7 @@ struct _wad_file_s
 {
     // Class of this file.
 
-    wad_file_class_t *file_class;
+   // wad_file_class_t *file_class;
 
     // If this is NULL, the file cannot be mapped into memory.  If this
     // is non-NULL, it is a pointer to the mapped file.

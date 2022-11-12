@@ -26,7 +26,7 @@
 #include "m_misc.h"
 #include "m_argv.h"  // haleyjd 20110212: warning fix
 
-int		myargc;
+int		myargc = 0;
 char**		myargv;
 
 
@@ -43,13 +43,15 @@ char**		myargv;
 int M_CheckParmWithArgs(char *check, int num_args)
 {
     int i;
+	printf(check);
+	printf("\n");
+//    for (i = 1; i < myargc - num_args; i++)
+//    {
+//	if (!strcasecmp(check, myargv[i]))
+//	    return i;
+//    }
 
-    for (i = 1; i < myargc - num_args; i++)
-    {
-	if (!strcasecmp(check, myargv[i]))
-	    return i;
-    }
-
+	printf("no args...");
     return 0;
 }
 

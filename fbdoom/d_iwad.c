@@ -34,21 +34,22 @@
 
 static const iwad_t iwads[] =
 {
-    { "doom2.wad",    doom2,     commercial, "Doom II" },
+    { "doom2.wad",    doom,     shareware, "Doom II" },
+    { "doom2.wad",    doom,     retail, "Doom II" },
     { "plutonia.wad", pack_plut, commercial, "Final Doom: Plutonia Experiment" },
     { "tnt.wad",      pack_tnt,  commercial, "Final Doom: TNT: Evilution" },
     { "doom.wad",     doom,      retail,     "Doom" },
-    { "DOOM1.WAD",    doom,      shareware,  "Doom Shareware" },
-    { "chex.wad",     pack_chex, shareware,  "Chex Quest" },
-    { "hacx.wad",     pack_hacx, commercial, "Hacx" },
-    { "freedm.wad",   doom2,     commercial, "FreeDM" },
-    { "freedoom2.wad", doom2,    commercial, "Freedoom: Phase 2" },
-    { "freedoom1.wad", doom,     retail,     "Freedoom: Phase 1" },
-    { "heretic.wad",  heretic,   retail,     "Heretic" },
-    { "heretic1.wad", heretic,   shareware,  "Heretic Shareware" },
-    { "hexen.wad",    hexen,     commercial, "Hexen" },
+    //{ "DOOM1.WAD",    doom,      shareware,  "Doom Shareware" },
+    //{ "chex.wad",     pack_chex, shareware,  "Chex Quest" },
+    //{ "hacx.wad",     pack_hacx, commercial, "Hacx" },
+    //{ "freedm.wad",   doom2,     commercial, "FreeDM" },
+    //{ "freedoom2.wad", doom2,    commercial, "Freedoom: Phase 2" },
+    //{ "freedoom1.wad", doom,     retail,     "Freedoom: Phase 1" },
+    //{ "heretic.wad",  heretic,   retail,     "Heretic" },
+    //{ "heretic1.wad", heretic,   shareware,  "Heretic Shareware" },
+   // { "hexen.wad",    hexen,     commercial, "Hexen" },
     //{ "strife0.wad",  strife,    commercial, "Strife" }, // haleyjd: STRIFE-FIXME
-    { "strife1.wad",  strife,    commercial, "Strife" },
+    //{ "strife1.wad",  strife,    commercial, "Strife" },
 };
 
 // Array of locations to search for IWAD files
@@ -735,8 +736,9 @@ char *D_FindIWAD(int mask, GameMission_t *mission)
 
         result = NULL;
 
+		printf("search for wad dir...\n");
         BuildIWADDirList();
-    
+    		printf("search for wad file...\n");
         for (i=0; result == NULL && i<num_iwad_dirs; ++i)
         {
             result = SearchDirectoryForIWAD(iwad_dirs[i], mask, mission);

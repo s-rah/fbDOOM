@@ -349,11 +349,11 @@ void I_BindJoystickVariables(void)
     M_BindVariable("joystick_y_invert",     &joystick_y_invert);
     M_BindVariable("joystick_strafe_invert",&joystick_strafe_invert);
 
-    for (i = 0; i < NUM_VIRTUAL_BUTTONS; ++i)
-    {
-        char name[32];
-        M_snprintf(name, sizeof(name), "joystick_physical_button%i", i);
-        M_BindVariable(name, &joystick_physical_buttons[i]);
-    }
+//    for (i = 0; i < NUM_VIRTUAL_BUTTONS; ++i)
+//    {
+//        char name[32];
+//        M_snprintf(name, sizeof(name), "joystick_physical_button%i", i);
+//        M_BindVariable(name, &joystick_physical_buttons[i]);
+//    }
 }
 

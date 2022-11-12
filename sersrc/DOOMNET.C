@@ -6,10 +6,10 @@
 #include <dos.h>
 #include "doomnet.h"
 
-//#include "serstr.h"
-#include "ser_frch.h"		// FRENCH VERSION
+#include "serstr.h"
+//#include "ser_frch.h"		// FRENCH VERSION
 
-#define DOOM2
+#define DOOM
 
 extern	int	myargc;
 extern	char **myargv;

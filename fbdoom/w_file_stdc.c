@@ -41,7 +41,7 @@ static wad_file_t *W_StdC_OpenFile(char *path)
     {
         return NULL;
     }
-
+	printf("here...\n");
     // Create a new stdc_wad_file_t to hold the file handle.
 
     result = Z_Malloc(sizeof(stdc_wad_file_t), PU_STATIC, 0);

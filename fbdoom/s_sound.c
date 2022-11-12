@@ -156,7 +156,7 @@ static void S_StopChannel(int cnum)
 
     c = &channels[cnum];
 
-    if (c->sfxinfo)
+    if (c->sfxinfo != NULL)
     {
         // stop the sound playing
 
@@ -167,18 +167,18 @@ static void S_StopChannel(int cnum)
 
         // check to see if other channels are playing the sound
 
-        for (i=0; i<snd_channels; i++)
-        {
-            if (cnum != i && c->sfxinfo == channels[i].sfxinfo)
-            {
-                break;
-            }
-        }
-        
-        // degrade usefulness of sound data
-
-        c->sfxinfo->usefulness--;
-        c->sfxinfo = NULL;
+//        for (i=0; i<snd_channels; i++)
+//        {
+//            if (cnum != i && c->sfxinfo == channels[i].sfxinfo)
+//            {
+//                break;
+//            }
+//        }
+//
+//        // degrade usefulness of sound data
+//
+//        c->sfxinfo->usefulness--;
+//        c->sfxinfo = NULL;
     }
 }
 
@@ -192,7 +192,7 @@ void S_Start(void)
 {
     int cnum;
     int mnum;
-
+	printf("starting sound...\n");
     // kill all playing sounds at start of level
     //  (trust me - a good idea)
     for (cnum=0 ; cnum<snd_channels ; cnum++)
@@ -235,7 +235,7 @@ void S_Start(void)
         {
             mnum = spmus[gamemap-1];
         }
-    }        
+    }
 
     S_ChangeMusic(mnum, true);
 }        
@@ -263,7 +263,7 @@ static int S_GetChannel(mobj_t *origin, sfxinfo_t *sfxinfo)
 {
     // channel number to use
     int                cnum;
-    
+
     channel_t*        c;
 
     // Find an open channel
@@ -294,7 +294,7 @@ static int S_GetChannel(mobj_t *origin, sfxinfo_t *sfxinfo)
 
         if (cnum == snd_channels)
         {
-            // FUCK!  No lower priority.  Sorry, Charlie.    
+            // FUCK!  No lower priority.  Sorry, Charlie.
             return -1;
         }
         else
@@ -335,12 +335,12 @@ static int S_AdjustSoundParams(mobj_t *listener, mobj_t *source,
 
     // From _GG1_ p.428. Appox. eucledian distance fast.
     approx_dist = adx + ady - ((adx < ady ? adx : ady)>>1);
-    
+
     if (gamemap != 8 && approx_dist > S_CLIPPING_DIST)
     {
         return 0;
     }
-    
+
     // angle of source to listener
     angle = R_PointToAngle2(listener->x,
                             listener->y,
@@ -382,9 +382,9 @@ static int S_AdjustSoundParams(mobj_t *listener, mobj_t *source,
         // distance effect
         *vol = (snd_SfxVolume
                 * ((S_CLIPPING_DIST - approx_dist)>>FRACBITS))
-            / S_ATTENUATOR; 
+            / S_ATTENUATOR;
     }
-    
+
     return (*vol > 0);
 }
 
@@ -436,7 +436,7 @@ void S_StartSound(void *origin_p, int sfx_id)
 
         if (origin->x == players[consoleplayer].mo->x
          && origin->y == players[consoleplayer].mo->y)
-        {        
+        {
             sep = NORM_SEP;
         }
 
@@ -444,7 +444,7 @@ void S_StartSound(void *origin_p, int sfx_id)
         {
             return;
         }
-    }        
+    }
     else
     {
         sep = NORM_SEP;
@@ -547,7 +547,7 @@ void S_UpdateSounds(mobj_t *listener)
                                                   c->origin,
                                                   &volume,
                                                   &sep);
-                    
+
                     if (!audible)
                     {
                         S_StopChannel(cnum);
@@ -574,7 +574,7 @@ void S_SetMusicVolume(int volume)
     {
         I_Error("Attempt to set music volume at %d",
                 volume);
-    }    
+    }
 
     I_SetMusicVolume(volume);
 }
@@ -633,7 +633,9 @@ void S_ChangeMusic(int musicnum, int looping)
     // get lumpnum if neccessary
     if (!music->lumpnum)
     {
-        M_snprintf(namebuf, sizeof(namebuf), "d_%s", DEH_String(music->name));
+    	printf(music->name);
+    	printf("\n");
+        snprintf(namebuf, sizeof(namebuf), "d_introa", music->name);
         music->lumpnum = W_GetNumForName(namebuf);
     }
 

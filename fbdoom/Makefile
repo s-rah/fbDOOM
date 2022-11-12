@@ -20,8 +20,8 @@ OBJS+=$(OBJDIR)/i_video_fbdev.o
 OBJS+=$(OBJDIR)/i_input_tty.o
 
 CC=$(CROSS_COMPILE)gcc  # gcc or g++
-CFLAGS+=-fno-builtin -nodefaultlibs -nostdlib -nolibc -I ../../stdlib
-LDFLAGS+=-fno-builtin -nodefaultlibs -nostdlib -nolibc -Wl,--gc-sections
+CFLAGS+= -mno-relax  -O0 -ffreestanding -nostartfiles -nostdlib  -fno-builtin -nodefaultlibs -nostdlib -nolibc -I ../../stdlib
+LDFLAGS+= -mno-relax    -O0 -ffreestanding -nostartfiles -nostdlib  -fno-builtin -nodefaultlibs  -nostdlib -nolibc -Wl,--gc-sections
 CFLAGS+= -Wall
 LIBS+=
 

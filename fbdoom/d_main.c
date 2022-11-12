@@ -337,18 +337,23 @@ void D_BindVariables(void)
 {
     int i;
 
+	printf("defaults...\n");
     M_ApplyPlatformDefaults();
-
+	printf("video...\n");
     I_BindVideoVariables();
+	printf("joystick...\n");
     I_BindJoystickVariables();
+	printf("sound...\n");
     I_BindSoundVariables();
 
+	printf("controls...\n");
     M_BindBaseControls();
     M_BindWeaponControls();
     M_BindMapControls();
     M_BindMenuControls();
     M_BindChatControls(MAXPLAYERS);
 
+	printf("msg...\n");
     key_multi_msgplayer[0] = HUSTR_KEYGREEN;
     key_multi_msgplayer[1] = HUSTR_KEYINDIGO;
     key_multi_msgplayer[2] = HUSTR_KEYBROWN;
@@ -369,14 +374,14 @@ void D_BindVariables(void)
     M_BindVariable("vanilla_demo_limit",     &vanilla_demo_limit);
     M_BindVariable("show_endoom",            &show_endoom);
 
-    // Multiplayer chat macros
-
+//    // Multiplayer chat macros
+	printf("macros...\n");
     for (i=0; i<10; ++i)
     {
         char buf[12];
 
-        M_snprintf(buf, sizeof(buf), "chatmacro%i", i);
-        M_BindVariable(buf, &chat_macros[i]);
+        //M_snprintf(buf, sizeof(buf), "chatmacro%d", i);
+       // M_BindVariable(buf, &chat_macros[i]);
     }
 }
 
@@ -440,6 +445,7 @@ void D_DoomLoop (void)
         wipegamestate = gamestate;
     }
 
+	printf("doom main loop\n");
     while (1)
     {
 		// frame syncronous IO operations
@@ -447,7 +453,7 @@ void D_DoomLoop (void)
 
 		TryRunTics (); // will run at least one tic
 
-		S_UpdateSounds (players[consoleplayer].mo);// move positional sounds
+		//S_UpdateSounds (players[consoleplayer].mo);// move positional sounds
 
 		// Update display, next frame, with current state.
 		if (screenvisible)
@@ -1174,7 +1180,7 @@ void D_DoomMain (void)
 
     DEH_printf("Z_Init: Init zone memory allocation daemon. \n");
     Z_Init ();
-
+	printf("checking init\n");
 #ifdef FEATURE_MULTIPLAYER
     //!
     // @category net
@@ -1239,7 +1245,8 @@ void D_DoomMain (void)
     //
     // Disable monsters.
     //
-	
+
+	printf("checking monsters\n");
     nomonsters = M_CheckParm ("-nomonsters");
 
     //!
@@ -1247,7 +1254,7 @@ void D_DoomMain (void)
     //
     // Monsters respawn after being killed.
     //
-
+	printf("checking respawn\n");
     respawnparm = M_CheckParm ("-respawn");
 
     //!
@@ -1255,7 +1262,7 @@ void D_DoomMain (void)
     //
     // Monsters move faster.
     //
-
+	printf("checking fast\n");
     fastparm = M_CheckParm ("-fast");
 
     //! 
@@ -1264,7 +1271,7 @@ void D_DoomMain (void)
     // Developer mode.  F1 saves a screenshot in the current working
     // directory.
     //
-
+	printf("checking dev\n");
     devparm = M_CheckParm ("-devparm");
 
     I_DisplayFPSDots(devparm);
@@ -1353,7 +1360,9 @@ void D_DoomMain (void)
     // Load configuration files before initialising other subsystems.
     DEH_printf("M_LoadDefaults: Load system defaults.\n");
     M_SetConfigFilenames("default.cfg", PROGRAM_PREFIX "doom.cfg");
+   	printf("bind vars\n");
     D_BindVariables();
+	printf("load defaults\n");
     M_LoadDefaults();
 
     // Save configuration at exit.
@@ -1507,6 +1516,7 @@ void D_DoomMain (void)
         printf("Playing demo %s.\n", file);
     }
 
+	printf("here...");
     I_AtExit((atexit_func_t) G_CheckDemoStatus, true);
 
     // Generate the WAD hash table.  Speed things up a bit.
@@ -1764,7 +1774,7 @@ void D_DoomMain (void)
     P_Init ();
 
     DEH_printf("S_Init: Setting up sound.\n");
-    S_Init (sfxVolume * 8, musicVolume * 8);
+   // S_Init (sfxVolume * 8, musicVolume * 8);
 
     DEH_printf("D_CheckNetGame: Checking network game status.\n");
     D_CheckNetGame ();
@@ -1835,6 +1845,7 @@ void D_DoomMain (void)
 			D_StartTitle ();                // start up intro loop
     }
 
+	printf("Main Doom Loop\n");
     D_DoomLoop ();  // never returns
 }
 

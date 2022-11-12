@@ -98,25 +98,28 @@ void Z_Init (void)
 {
     memblock_t*	block;
     int		size;
-
+	printf("0\n");
     mainzone = (memzone_t *)I_ZoneBase (&size);
+    	printf("1\n");
     mainzone->size = size;
 
+	printf("a\n");
     // set the entire zone to one free block
     mainzone->blocklist.next =
 	mainzone->blocklist.prev =
 	block = (memblock_t *)( (byte *)mainzone + sizeof(memzone_t) );
-
+	printf("b\n");
     mainzone->blocklist.user = (void *)mainzone;
     mainzone->blocklist.tag = PU_STATIC;
     mainzone->rover = block;
 	
     block->prev = block->next = &mainzone->blocklist;
-
+	printf("c\n");
     // free block
     block->tag = PU_FREE;
     
     block->size = mainzone->size - sizeof(memzone_t);
+    printf("b\n");
 }
 
 

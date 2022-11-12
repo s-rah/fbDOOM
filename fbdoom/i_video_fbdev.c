@@ -36,12 +36,12 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include "tables.h"
 #include "doomkeys.h"
 
-#include <stdbool.h>
+
 #include "stdlib.h"
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <stdarg.h>
+
 #include <sys/time.h>
 #include <sys/types.h>
 //#include <sys/socket.h>
@@ -66,7 +66,9 @@ static struct color colors[256];
 // The screen buffer; this is modified to draw things to the screen
 
 byte *I_VideoBuffer = NULL;
-byte *I_VideoBuffer_FB = NULL;
+//byte *I_VideoBuffer_FB = NULL;
+#define VGA_CONTROL  ((volatile uint8_t *)0x40000000)
+#define I_VideoBuffer_FB  ((volatile uint8_t *)0x50000000)
 
 /* framebuffer file descriptor */
 int fd_fb = 0;
@@ -196,11 +198,13 @@ void I_InitGraphics (void)
 //    }
 //
 //
+
+
 //    /* Allocate screen to draw to */
-//	I_VideoBuffer = (byte*)Z_Malloc (SCREENWIDTH * SCREENHEIGHT, PU_STATIC, NULL);  // For DOOM to draw on
-//	I_VideoBuffer_FB = (byte*)malloc(fb.xres * fb.yres * (fb.bits_per_pixel/8));     // For a single write() syscall to fbdev
+	I_VideoBuffer = (byte*)Z_Malloc (SCREENWIDTH * SCREENHEIGHT, PU_STATIC, NULL);  // For DOOM to draw on
+	//I_VideoBuffer_FB = (byte*)malloc(SCREENWIDTH * SCREENHEIGHT * 8);     // For a single write() syscall to fbdev
 //
-//	screenvisible = true;
+	screenvisible = true;
 //
 //    extern int I_InitInput(void);
 //    I_InitInput();
@@ -219,7 +223,7 @@ void I_StartFrame (void)
 
 __attribute__ ((weak)) void I_GetEvent (void)
 {
-//	event_t event;
+	event_t event;
 //	bool button_state;
 //
 //	button_state = button_read ();
@@ -389,19 +393,41 @@ __attribute__ ((weak)) void I_GetEvent (void)
 
 __attribute__ ((weak)) void I_StartTic (void)
 {
+	printf("start tic\n");
 	I_GetEvent();
 }
 
 void I_UpdateNoBlit (void)
 {
+	printf("update not blit\n");
 }
 
 //
 // I_FinishUpdate
 //
 
+char vga_pixel(char pixel) {
+
+}
+#define GFX_RGB565(r, g, b)			((((r & 0xF8) >> 3) << 11) | (((g & 0xFC) >> 2) << 5) | ((b & 0xF8) >> 3))
+
 void I_FinishUpdate (void)
 {
+
+	printf("frame\n");
+
+	byte* doompal = W_CacheLumpName("PLAYPAL", PU_CACHE);
+	I_SetPalette(doompal);
+
+	byte* fb = I_VideoBuffer_FB;
+	for (int y=0; y<SCREENHEIGHT; y++) {
+		for(int x=0; x<SCREENWIDTH; x++) {
+			int index = (y*SCREENWIDTH)+x;
+
+			fb[index] = I_VideoBuffer[index] ;
+		}
+	}
+
 //    int y;
 //    int x_offset, y_offset, x_offset_end;
 //    unsigned char *line_in, *line_out;
@@ -451,6 +477,7 @@ void I_FinishUpdate (void)
 //
 void I_ReadScreen (byte* scr)
 {
+	printf("read screen\n");
     memcpy (scr, I_VideoBuffer, SCREENWIDTH * SCREENHEIGHT);
 }
 
@@ -464,33 +491,17 @@ void I_ReadScreen (byte* scr)
 
 void I_SetPalette (byte* palette)
 {
+	byte * vga_control = VGA_CONTROL;
+	vga_control[0x408] = 0;
 	int i;
-	//col_t* c;
-
-	//for (i = 0; i < 256; i++)
-	//{
-	//	c = (col_t*)palette;
-
-	//	rgb565_palette[i] = GFX_RGB565(gammatable[usegamma][c->r],
-	//								   gammatable[usegamma][c->g],
-	//								   gammatable[usegamma][c->b]);
-
-	//	palette += 3;
-	//}
-
-
-    /* performance boost:
-     * map to the right pixel format over here! */
-
-    for (i=0; i<256; ++i ) {
-        colors[i].a = 0;
-        colors[i].r = gammatable[usegamma][*palette++];
-        colors[i].g = gammatable[usegamma][*palette++];
-        colors[i].b = gammatable[usegamma][*palette++];
-    }
-
-    /* Set new color map in kernel framebuffer driver */
-    //XXX FIXME ioctl(fd_fb, IOCTL_FB_PUTCMAP, colors);
+	col_t* c;
+	for (i = 0; i < 256; i++) {
+			c = (col_t*)palette;
+    		vga_control[0x409] = gammatable[usegamma][c->r] ,
+    		vga_control[0x409] = gammatable[usegamma][c->g],
+    		vga_control[0x409] = gammatable[usegamma][c->b];
+    		palette += 3;
+	}
 }
 
 // Given an RGB value, find the closest matching palette index.
@@ -533,14 +544,19 @@ int I_GetPaletteIndex (int r, int g, int b)
 
 void I_BeginRead (void)
 {
+	printf("iread begin\n");
 }
 
 void I_EndRead (void)
 {
+	printf("iread end\n");
 }
 
 void I_SetWindowTitle (char *title)
 {
+	printf("window title: ");
+	printf(title);
+	printf("\n");
 }
 
 void I_GraphicsCheckCommandLine (void)

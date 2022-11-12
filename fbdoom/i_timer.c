@@ -30,9 +30,14 @@
 
 static uint32_t basetime = 0;
 
+static uint32_t ticks = 0;
+
 int I_GetTicks(void)
 {
-	return 0;
+	ticks += 1;
+	ticks = ticks % 86400;
+	//print_hex(ticks);
+	return ticks;
     //struct timeval  tp;
     //struct timezone tzp;
   

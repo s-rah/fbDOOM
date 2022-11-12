@@ -288,14 +288,17 @@ void HU_Init(void)
 
     int		i;
     int		j;
-    char	buffer[9];
+    char buffer[9];
 
     // load the heads-up font
     j = HU_FONTSTART;
     for (i=0;i<HU_FONTSIZE;i++)
     {
 	DEH_snprintf(buffer, 9, "STCFN%.3d", j++);
+	//buffer = "STCFN033";
+	printf("fetching cache font...\n");
 	hu_font[i] = (patch_t *) W_CacheLumpName(buffer, PU_STATIC);
+   printf("we will never get here.. cache font...\n");
     }
 
 }

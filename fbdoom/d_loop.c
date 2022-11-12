@@ -720,13 +720,14 @@ void TryRunTics (void)
 
     // in singletics mode, run a single tic every time this function
     // is called.
-
+	//printf("building new tick\n");
     if (singletics)
     {
         BuildNewTic();
     }
     else
     {
+    //	printf("net update\n");
         NetUpdate ();
     }
 
@@ -735,7 +736,7 @@ void TryRunTics (void)
     availabletics = lowtic - gametic/ticdup;
 
     // decide how many tics to run
-
+    	//printf("new sync\n");
     if (new_sync)
     {
 	counts = availabletics;
@@ -755,7 +756,7 @@ void TryRunTics (void)
 
         if (net_client_connected)
         {
-            OldNetSync();
+           OldNetSync();
         }
     }
 
@@ -780,7 +781,7 @@ void TryRunTics (void)
 	{
 	    return;
 	}
-
+	//printf("try to sleep\n");
         I_Sleep(1);
     }
 
@@ -815,7 +816,7 @@ void TryRunTics (void)
 
             TicdupSquash(set);
 	}
-
+	//printf("last net uupdate...\n");
 	NetUpdate ();	// check for new console commands
     }
 }

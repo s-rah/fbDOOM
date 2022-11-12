@@ -141,9 +141,9 @@ byte *I_ZoneBase (int *size)
     //
     // Specify the heap size, in MiB (default 16).
     //
-
-    p = M_CheckParmWithArgs("-mb", 1);
-
+	printf("zonebase args\n");
+    p = 0;//M_CheckParmWithArgs("-mb", 1);
+	printf("zonebase if\n");
     if (p > 0)
     {
         default_ram = atoi(myargv[p+1]);
@@ -159,6 +159,7 @@ byte *I_ZoneBase (int *size)
 
     printf("zone memory: %p, %x allocated for zone\n", 
            zonemem, *size);
+           print_hex(zonemem);
 
     return zonemem;
 }
@@ -172,6 +173,7 @@ void I_PrintBanner(char *msg)
        // putchar(' ');
 
    // puts(msg);
+   printf(msg);
 }
 
 void I_PrintDivider(void)
@@ -272,7 +274,15 @@ static boolean already_quitting = false;
 
 void I_Error (char *error, ...)
 {
-
+ char msgbuf[512];
+    va_list argptr;
+    va_start(argptr, error);
+    memset(msgbuf, 0, sizeof(msgbuf));
+    M_vsnprintf(msgbuf, sizeof(msgbuf), error, argptr);
+    va_end(argptr);
+	printf(msgbuf);
+	printf("\n");
+	__asm__("wfi");
 }
 
 //

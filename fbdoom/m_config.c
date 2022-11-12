@@ -1562,16 +1562,21 @@ static default_collection_t extra_defaults =
 
 static default_t *SearchCollection(default_collection_t *collection, char *name)
 {
+//	printf("search collection: num _defaults:");
+//	print_hex(collection->numdefaults);
+//	printf(" name: ");
+//	printf(name);
+//	printf("\n");
     int i;
-
     for (i=0; i<collection->numdefaults; ++i) 
     {
+    	//print_hex(i);
         if (!strcmp(name, collection->defaults[i].name))
         {
             return &collection->defaults[i];
         }
     }
-
+	printf("non found...collection\n");
     return NULL;
 }
 
@@ -1770,6 +1775,8 @@ static void SetVariable(default_t *def, char *value)
 
 static void LoadDefaultCollection(default_collection_t *collection)
 {
+printf("load default for collection\n");
+
 #if ORIGCODE
     FILE *f;
     default_t *def;
@@ -1881,7 +1888,7 @@ void M_SaveDefaultsAlternate(char *main, char *extra)
 void M_LoadDefaults (void)
 {
     int i;
- 
+
     // check for a custom default file
 
     //!
@@ -1936,6 +1943,9 @@ void M_LoadDefaults (void)
 
 static default_t *GetDefaultForName(char *name)
 {
+printf("get default for name: ");
+printf(name);
+printf("\n");
     default_t *result;
 
     // Try the main list and the extras

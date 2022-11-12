@@ -46,20 +46,38 @@ static wad_file_class_t *wad_file_classes[] =
     &stdc_wad_file,
 };
 
+#define DOOMWAD ((volatile uint8_t *)0x000000080018000)
+
 wad_file_t *W_OpenFile(char *path)
 {
-    wad_file_t *result;
+    wad_file_t *result = NULL;
+
+    result = malloc(sizeof(wad_file_t));
+    result->mapped = DOOMWAD;
+    result->length = 10396254;
+
    	return result;
 }
 
 void W_CloseFile(wad_file_t *wad)
 {
-    wad->file_class->CloseFile(wad);
+    //wad->file_class->CloseFile(wad);
 }
 
 size_t W_Read(wad_file_t *wad, unsigned int offset,
               void *buffer, size_t buffer_len)
 {
-    return wad->file_class->Read(wad, offset, buffer, buffer_len);
+	printf("file read\n");
+	print_hex(offset);
+	print_hex(buffer_len);
+	char * buf = buffer;
+	printf("reading DOOM data\n");
+	for (int i=offset; i<offset+buffer_len; i++) {
+		//print_hex(DOOMWAD[i]);
+		buf[i-offset] = DOOMWAD[i];
+	}
+	printf("end file read...\n");
+	return buffer_len;
+   // return wad->file_class->Read(wad, offset, buffer, buffer_len);
 }
 
